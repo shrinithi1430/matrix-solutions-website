@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Postings | MatriX Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Read the latest career guidance articles from MatriX Solutions.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --teal: #1FA9A0;
+      --teal-dark: #167e77;
+      --dark: #2C3E50;
+      --grey: #4A4F55;
+      --light: #F7FDFC;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #fff; color: var(--grey); min-height: 100vh; }
+    header { position: fixed; top: 0; width: 100%; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--teal-dark); text-decoration: none; }
+    .logo img { width: 100px; height: auto; }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { text-decoration: none; color: var(--dark); font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: background .2s, color .2s; }
+    nav a.active, nav a:hover { background: rgba(31,169,160,0.1); color: var(--teal-dark); }
+    .page-header { padding: 140px 5% 40px; text-align: center; background: radial-gradient(circle at top left, #F0FCFB, #fff 60%); }
+    .page-header h1 { font-size: clamp(2.3rem, 4vw, 3.5rem); color: var(--dark); }
+    .page-header p { margin-top: 16px; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--grey); font-size: 1rem; }
+    .content { max-width: 1200px; margin: auto; padding: 0 5% 80px; }
+    .blogs-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .blog-card { background: #fff; border: 1px solid rgba(31,169,160,0.12); border-radius: 24px; overflow: hidden; box-shadow: 0 16px 35px rgba(31,169,160,0.08); transition: transform .25s ease; }
+    .blog-card:hover { transform: translateY(-5px); }
+    .blog-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .blog-card-body { padding: 24px; }
+    .blog-card .meta { font-size: 0.9rem; color: var(--teal-dark); margin-bottom: 12px; }
+    .blog-card h2 { font-size: 1.4rem; margin-bottom: 14px; color: var(--dark); }
+    .blog-card p { margin-bottom: 20px; color: var(--grey); line-height: 1.8; }
+    .blog-card a { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; color: var(--teal); font-weight: 600; }
+    .empty, .error { padding: 48px 24px; text-align: center; color: var(--dark); }
+    @media (max-width: 720px) { header { flex-wrap: wrap; gap: 16px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> MatriX Solutions</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="job-postings.html" class="active">Job Postings</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header">
+      <h1>Latest Job Postings for Career Growth</h1>
+      <p>Browse our dynamic job postings feed and discover new opportunities powered by a MongoDB API.</p>
+  </section>
+
+  <main class="content">
+    <div id="blogsContainer" class="blogs-grid"></div>
+  </main>
+
+  <script>
+    const API_BASE = "https://matrix-solution-server.onrender.com/api/jobs";
+
+    async function loadBlogs() {
+      const container = document.getElementById("blogsContainer");
+      container.innerHTML = `<p class="empty">Loading job postings...</p>`;
+
+      try {
+        const response = await fetch(API_BASE);
+        if (!response.ok) throw new Error("Fetch failed");
+        const result = await response.json();
+        
+        if (!result.success || !Array.isArray(result.data) || result.data.length === 0) {
+          container.innerHTML = `<p class="empty">No published job postings found.</p>`;
+          return;
+        }
+
+        const jobs = result.data.filter(j => j.isActive !== false);
+
+        container.innerHTML = jobs.map(job => `
+          <article class="blog-card">
+            <img src="${job.posterImage || 'https://via.placeholder.com/640x360?text=Job+Posting'}" alt="${job.title}">
+            <div class="blog-card-body">
+              <p class="meta">${job.company ? `${job.company} · ` : ''}${job.location || 'Remote'} · ${job.jobType || 'Job'}</p>
+              <h2>${job.title}</h2>
+              <p>${job.responsibilities?.slice(0, 120) || job.description?.slice(0, 120) || 'No description available.'}...</p>
+              <a href="job-details.html?slug=${encodeURIComponent(job.slug)}">View Job <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        `).join("");
+      } catch (error) {
+        container.innerHTML = `<p class="error">Unable to load job postings. Please make sure the backend is running at https://matrix-solution-server.onrender.com.</p>`;
+        console.error(error);
+      }
+    }
+
+    loadBlogs();
+  </script>
+</body>
+</html>

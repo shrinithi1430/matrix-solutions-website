@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Matrix HR Admin</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .login-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 28px;
+            margin: 0 auto 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card animate-fade-in">
+        <div class="login-header">
+            <div class="logo-circle">M</div>
+            <h1>Welcome Back</h1>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Please enter your details to sign in.</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="admin@matrix.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <label class="switch-container" style="cursor: pointer;">
+                    <span class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </span>
+                    <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Remember me</span>
+                </label>
+                <a href="#" style="font-size: 13px; font-weight: 600; color: var(--primary); text-decoration: none;">Forgot password?</a>
+            </div>
+
+            <button type="submit" id="loginBtn" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 1rem;">
+                Sign In <i data-lucide="arrow-right"></i>
+            </button>
+            <p id="errorMsg" style="color: var(--danger); font-size: 13px; text-align: center; margin-top: 1rem; display: none;"></p>
+        </form>
+
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <p style="font-size: 14px; color: var(--text-muted);">Not an admin? <a href="../index.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Back to Website</a></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        const API_URL = "https://matrix-solution-server.onrender.com/api/auth/login";
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMsg');
+
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = 'Signing in...';
+            errorMsg.style.display = 'none';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    localStorage.setItem('adminToken', data.token);
+                    window.location.href = './index.html';
+                } else {
+                    errorMsg.textContent = data.message || 'Invalid credentials';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Connection error. Please try again.';
+                errorMsg.style.display = 'block';
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = 'Sign In <i data-lucide="arrow-right"></i>';
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Posting Details | MatriX Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed job posting information from MatriX Solutions.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root { --teal: #1FA9A0; --teal-dark: #167e77; --dark: #2C3E50; --grey: #4A4F55; --light: #F7FDFC; --white: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #fff; color: var(--grey); min-height: 100vh; }
+    header { position: fixed; top: 0; width: 100%; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--teal-dark); text-decoration: none; }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { text-decoration: none; color: var(--dark); font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: background .2s, color .2s; }
+    nav a:hover { background: rgba(31,169,160,0.1); color: var(--teal-dark); }
+    .content { max-width: 900px; margin: 140px auto 80px; padding: 0 5%; }
+    .hero-image { width: 100%; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .hero-image img { width: 100%; display: block; object-fit: cover; height: 420px; }
+    .meta { margin: 24px 0 12px; color: var(--teal-dark); font-weight: 600; }
+    h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); color: var(--dark); margin-bottom: 18px; }
+    .content-block { margin-top: 24px; line-height: 1.8; color: var(--grey); font-size: 1rem; }
+    .content-block p { margin-bottom: 18px; }
+    .back-link { display: inline-flex; align-items: center; gap: 10px; color: var(--teal); text-decoration: none; font-weight: 600; margin-bottom: 30px; }
+    .empty, .error { padding: 48px 24px; text-align: center; color: var(--dark); }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> MatriX Solutions</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="job-postings.html">Job Postings</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <a href="job-postings.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Job Postings</a>
+    <div id="blogDetail"></div>
+  </main>
+
+  <script>
+    const API_BASE = "https://matrix-solution-server.onrender.com/api/jobs/slug";
+    const blogDetail = document.getElementById("blogDetail");
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+
+    async function loadBlog() {
+      if (!slug) {
+        blogDetail.innerHTML = `<p class="error">Job posting slug is missing from the URL.</p>`;
+        return;
+      }
+
+      blogDetail.innerHTML = `<p class="empty">Loading job posting...</p>`;
+
+      try {
+        const response = await fetch(`${API_BASE}/${encodeURIComponent(slug)}`);
+        if (!response.ok) throw new Error("Job posting not found");
+
+        const result = await response.json();
+        if (!result.success || !result.data) throw new Error("Job data error");
+        
+        const job = result.data;
+        document.title = `${job.title} | MatriX Solutions`;
+
+        blogDetail.innerHTML = `
+          <div class="hero-image"><img src="${job.posterImage || 'https://via.placeholder.com/1200x600?text=Job+Posting'}" alt="${job.title}"></div>
+          <p class="meta">${job.company ? `${job.company} · ` : ''}${job.location || 'Remote'} · ${job.jobType || 'Job'}</p>
+          <h1>${job.title}</h1>
+          <p class="meta">${job.experience || ''} ${job.salary ? `· ${job.salary}` : ''}</p>
+          <div class="content-block">
+            <h2>Roles and Responsibilities</h2>
+            <p>${job.responsibilities?.replace(/\n/g, '<br>') || 'No responsibilities provided.'}</p>
+            
+            ${job.description ? `<h2>Description</h2><p>${job.description.replace(/\n/g, '<br>')}</p>` : ''}
+            ${job.qualification ? `<h2>Qualification</h2><p>${job.qualification}</p>` : ''}
+            
+            <div style="margin-top: 40px;">
+                <a href="${job.applicationLink}" target="_blank" class="cta-btn" style="background: var(--teal); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-block;">Apply Now</a>
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        blogDetail.innerHTML = `<p class="error">Unable to load this job posting. Error: ${error.message}</p>`;
+        console.error(error);
+      }
+    }
+
+    loadBlog();
+  </script>
+</body>
+</html>

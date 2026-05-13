@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MatriX Solutions.| Career Guidance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+ <meta name="description" content="Learn about Matrix Solutions LLP. Discover our mission, values, team expertise, and commitment to transforming careers through professional guidance and mentoring.">
+    <meta name="keywords" content="about matrix solutions, career guidance company, professional development team, mentoring services, company mission">
+    <meta name="author" content="Matrix Solutions LLP">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta property="og:title" content="About Us | MatriX Solutions - Our Mission & Team">
+    <meta property="og:description" content="Discover Matrix Solutions LLP's mission, values, and expert team dedicated to career transformation and professional development.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/aboutus.html">
+    <meta property="og:image" content="https://yourwebsite.com/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us | MatriX Solutions">
+    <meta name="twitter:description" content="Learn about our team and mission in career guidance.">
+    <link rel="canonical" href="https://yourwebsite.com/aboutus.html">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    :root {
+      --teal: #1FA9A0;
+      --teal-dark: #167e77;
+      --dark: #2C3E50;
+      --grey: #4A4F55;
+      --light: #F7FDFC;
+      --header-light: #F0FCFB; /* matches hero but slightly distinct */
+      --header-alt: #F7FBFA;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #fff;
+      color: var(--grey);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      /* light header matching homepage with subtle separation */
+      background: linear-gradient(180deg, var(--header-light), rgba(255,255,255,0.95));
+      backdrop-filter: blur(8px);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 30px rgba(16, 50, 53, 0.06);
+      z-index: 1000;
+      transition: background 0.25s ease, transform 0.25s ease;
+      border-bottom: 1px solid rgba(4,40,39,0.03);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+
+    .logo p {
+      color: var(--teal);
+      margin: 0;
+    }
+
+    .logo img {
+      width: 100px;
+      /* Adjusted size for better header fit */
+      height: auto;
+    }
+
+    /* Desktop Nav */
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a.nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 15px;
+      position: relative;
+      transition: color 0.25s, background 0.25s, transform 0.2s;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.55);
+      margin: 0 4px;
+    }
+
+    /* Underline Animation (kept subtle in boxed design) */
+    nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: var(--teal);
+      transition: width 0.25s ease;
+    }
+
+    nav a.nav-link:hover {
+      color: var(--teal);
+      background: rgba(31,169,160,0.06);
+      transform: translateY(-2px);
+    }
+
+    nav a.nav-link.active {
+      background: rgba(31,169,160,0.12);
+      color: var(--teal-dark);
+      box-shadow: 0 6px 16px rgba(31,169,160,0.08);
+    }
+
+    nav a.nav-link:hover::after {
+      width: 100%;
+    }
+
+    nav .cta-btn {
+      background: var(--teal);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(31, 169, 160, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    nav .cta-btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(31, 169, 160, 0.4);
+    }
+
+    /* Mobile Menu Button */
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      color: var(--dark);
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #eee;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 12px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #f5f5f5;
+      background: rgba(255,255,255,0.6);
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--teal);
+      background: var(--light);
+    }
+
+
+    /* ================= SECTIONS ================= */
+    section {
+      padding: 110px 25px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 180px;
+      background: radial-gradient(circle at top left, #F0FCFB, #fff 60%);
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--teal);
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      font-size: 18px;
+      color: var(--grey);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero button {
+      padding: 14px 30px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    /* Intro box for WHO WE ARE section */
+    .intro-box {
+      margin: 28px auto 0;
+      max-width: 900px;
+      background: linear-gradient(135deg, rgba(31,169,160,0.06), rgba(255,255,255,0.9));
+      border-left: 6px solid var(--teal);
+      padding: 22px 26px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(31,169,160,0.08);
+      color: var(--dark);
+      text-align: left;
+    }
+
+    .intro-box h3 {
+      margin: 0 0 8px 0;
+      color: var(--teal);
+      font-size: 18px;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .intro-box p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    .primary {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(31, 169, 160, 0.3);
+    }
+
+    .primary:hover {
+      background: var(--teal-dark);
+      transform: translateY(-3px);
+    }
+
+    .secondary {
+      background: #fff;
+      border: 2px solid var(--teal);
+      color: var(--teal);
+    }
+
+    .secondary:hover {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* SERVICES */
+    .services {
+      /* keep section light so dark cards stand out */
+      background: linear-gradient(180deg, #f3f9f9 0%, #eef7f6 100%);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    /* Subtle floating animation for liveliness */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Gentle corner glow movement */
+    @keyframes glowMove {
+      0% { transform: translate(0,0) rotate(25deg); opacity: 0.95; }
+      50% { transform: translate(-10px,8px) rotate(25deg); opacity: 0.55; }
+      100% { transform: translate(0,0) rotate(25deg); opacity: 0.95; }
+    }
+
+    /* Icon pop animation */
+    @keyframes iconPop {
+      0% { transform: translateY(8px) scale(.92); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .service-card {
+      /* Dark, deep-teal cards for strong contrast */
+      background: linear-gradient(135deg, #063A39 0%, #0A5A59 100%);
+      padding: 40px 30px;
+      border-radius: 20px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 12px 36px rgba(4, 40, 39, 0.45);
+      color: #f1fbfa;
+      overflow: hidden;
+      position: relative;
+      will-change: transform, box-shadow;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .service-card::after {
+      /* subtle teal glow on corner for depth */
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle at center, rgba(31,169,160,0.12), transparent 55%);
+      transform: rotate(25deg);
+      pointer-events: none;
+      animation: glowMove 6s ease-in-out infinite;
+    }
+
+    .service-card:hover {
+      transform: translateY(-14px) scale(1.01);
+      box-shadow: 0 28px 64px rgba(12, 120, 115, 0.32);
+      border-color: rgba(31, 169, 160, 0.22);
+    }
+
+    .service-card i {
+      color: #fff;
+      font-size: 28px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center center;
+      animation: iconPop 600ms cubic-bezier(.2,.9,.2,1) forwards;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    /* Stagger icon pop for each card */
+    .services-grid .service-card:nth-child(1) i { animation-delay: 0.12s; }
+    .services-grid .service-card:nth-child(2) i { animation-delay: 0.18s; }
+    .services-grid .service-card:nth-child(3) i { animation-delay: 0.24s; }
+    .services-grid .service-card:nth-child(4) i { animation-delay: 0.30s; }
+    .services-grid .service-card:nth-child(5) i { animation-delay: 0.36s; }
+    .services-grid .service-card:nth-child(6) i { animation-delay: 0.42s; }
+
+    .service-card:hover i {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 14px 36px rgba(3, 63, 61, 0.38);
+    }
+
+    .service-card h4 {
+      color: #e6fffd;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      transform: translateZ(28px);
+    }
+
+    .service-card p {
+      color: #d7efed;
+      line-height: 1.6;
+      transform: translateZ(20px);
+    }
+
+    /* Inner wrapper preserves 3D transforms */
+    .card-inner {
+      transform-style: preserve-3d;
+      transition: transform 180ms cubic-bezier(.2,.9,.2,1);
+      will-change: transform;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Glare element replaced with softer shimmer; position updated by JS using --gx/--gy */
+    .card-glare {
+      position: absolute;
+      left: -10%;
+      top: -10%;
+      width: 120%;
+      height: 120%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 220ms ease, transform 220ms ease;
+      mix-blend-mode: overlay;
+      z-index: 1;
+      /* soft linear shimmer sweep instead of harsh radial flare */
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.06) 70%, rgba(255,255,255,0) 100%);
+      background-size: 220% 140%;
+      background-position: var(--gx, 50%) var(--gy, 50%);
+      filter: blur(12px) saturate(115%);
+      transform: translateZ(60px) scale(1.18) rotate(6deg);
+    }
+
+    /* shimmer animation while tilting (subtle) */
+    .service-card.is-tilting .card-glare {
+      animation: shimmer 2.8s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Pause float when tilting */
+    .service-card.is-tilting {
+      animation-play-state: paused !important;
+    }
+
+    /* Respect reduce-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .service-card,
+      .service-card::after,
+      .service-card i,
+      .card-inner,
+      .card-glare {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      margin-top: 50px;
+    }
+
+    form {
+      border: 1px solid #eee;
+      padding: 40px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 20px;
+      font-size: 15px;
+      transition: 0.3s;
+      background: #fcfcfc;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: #fff;
+    }
+
+    form button {
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    form button:hover {
+      background: var(--teal-dark);
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding-top: 70px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 25px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+.footer-col:nth-child(4) {
+  width:300px;
+}
+    .footer-col p {
+      font-size: 14px;
+      color: #b0b8c1;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #b0b8c1;
+      font-size: 14px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--teal);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 25px 25px;
+      text-align: center;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    /* RESPONSIVE */
+    @media(min-width: 900px) {
+      section {
+        padding: 120px 80px;
+      }
+
+      nav {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+    }
+
+    @media(max-width: 899px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+    @media (max-width:500px) {
+      /* ================= EXTRA RESPONSIVE FIXES ================= */
+
+/* Prevent header overlap */
+body {
+  padding-top: 90px;
+}
+
+/* Better container spacing */
+section {
+  padding: 80px 20px;
+}
+
+/* Typography scaling */
+.hero h1 {
+  font-size: clamp(28px, 5vw, 52px);
+}
+
+.hero p {
+  font-size: clamp(14px, 2.8vw, 18px);
+}
+
+/* Mobile grid improvements */
+.services-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.contact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Mobile nav smoother */
+.mobile-nav {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form mobile */
+form {
+  width: 100%;
+}
+
+/* Buttons mobile full width */
+.hero-buttons button {
+  width: 100%;
+  max-width: 260px;
+}
+
+/* Smaller footer text on mobile */
+.footer-bottom {
+  font-size: 12px;
+}
+
+      
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <div class=""><img src="logo.png" alt="Logo"></div> MatriX Solutions
+    </a>
+
+    <nav>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="aboutus.html" class="nav-link">About Us</a>
+      <a href="job-postings.html" class="nav-link">Job Postings</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#contact" class="cta-btn">Book Guidance</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="mobile-nav" id="mobileMenu">
+      <a href="#home" onclick="toggleMenu()">Home</a>
+      <a href="#services" onclick="toggleMenu()">Services</a>
+      <a href="aboutus.html" onclick="toggleMenu()">About Us</a>
+      <a href="job-postings.html" onclick="toggleMenu()">Job Postings</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+      <a href="#contact" style="color:var(--teal); font-weight:700;" onclick="toggleMenu()">Book Guidance</a>
+    </div>
+  </header>
+
+  <section class="hero center" id="home">
+    <h1 id="typing-heading" data-aos="fade-up"></h1>
+
+    <p data-aos="fade-up" data-aos-delay="100">
+      MatriX Solutions is a trusted HR consultancy based in Madurai, dedicated to helping
+      job seekers and organizations make confident, informed career decisions.
+    </p>
+
+    <p data-aos="fade-up" data-aos-delay="200"
+      style="font-size: 16px; background: #E0F7FA; display: inline-block; padding: 5px 15px; border-radius: 20px; color: var(--teal-dark);">
+      👉 <strong>Free Consultation Available</strong> | 📞 Talk to our HR experts today
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary" data-aos="zoom-in" onclick="document.getElementById('contact').scrollIntoView()">Book
+        Career Guidance</button>
+      <button class="secondary" data-aos="zoom-in" data-aos-delay="100"
+        onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
+    </div>
+
+    <div class="intro-box" data-aos="fade-up" data-aos-delay="300" role="region" aria-labelledby="who-we-are-heading">
+      <h3 id="who-we-are-heading">WHO WE ARE</h3>
+      <p>At MatriX Solutions, we understand that careers are more than just jobs — they are life-changing decisions. Our HR consulting services are designed to guide mid-level and senior professionals, startups, and corporates toward the right opportunities with confidence.
+      
+      With a strong focus on ethical guidance, deep research, and personalized support, we help you move forward with clarity and courage.</p>
+    </div>
+  </section>
+
+  <section class="services center" id="services">
+    <span style="color:var(--teal); font-size:13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"
+      data-aos="fade-up">What We Do</span>
+    <h2 data-aos="fade-up" style="color: var(--dark); font-size: 32px; margin-top: 10px;">Comprehensive Career Support
+    </h2>
+
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up">
+        <div class="card-inner">
+          <i class="fa-solid fa-file-lines"></i>
+          <h4>Resume Building</h4>
+          <p>Job-ready professional resumes tailored to your industry.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="50">
+        <div class="card-inner">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <h4>Cover Letter Creation</h4>
+          <p>Role-specific, powerful cover letters that tell your story.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-inner">
+          <i class="fa-brands fa-linkedin"></i>
+          <h4>LinkedIn Optimization</h4>
+          <p>Optimized profiles to increase visibility to top recruiters.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="card-inner">
+          <i class="fa-solid fa-briefcase"></i>
+          <h4>Naukri Profile Building</h4>
+          <p>High-ranking Naukri profile setup to get more calls.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-inner">
+          <i class="fa-solid fa-user-tie"></i>
+          <h4>Interview Preparation</h4>
+          <p>Mock interviews and HR-focused techniques to crack the deal.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="card-inner">
+          <i class="fa-solid fa-chart-line"></i>
+          <h4>Career Research</h4>
+          <p>Smart market analysis & salary offer comparison guidance.</p>
+        </div>
+        <div class="card-glare" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="center">
+      <span
+        style="color:var(--teal); font-size:13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Get
+        In Touch</span>
+      <h2 style="color: var(--dark); font-size: 32px; margin-top: 10px;">Ready to shape your future?</h2>
+    </div>
+    <div class="contact-grid">
+      <div data-aos="fade-right">
+        <div style="margin-bottom: 30px;">
+          <h3 style="color:var(--dark); margin-bottom:15px;">Contact Information</h3>
+          <p style="margin-bottom: 20px;">Reach out to us for a free consultation or to book any of our services.</p>
+        </div>
+
+        <div style="display:flex; gap:15px; margin-bottom:20px; align-items:center;">
+          <div
+            style="width:40px; height:40px; background:#E0F7FA; color:var(--teal); display:flex; align-items:center; justify-content:center; border-radius:50%;">
+            <i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <strong style="display:block; color:var(--dark);">Email</strong>
+            <span style="font-size:14px;">info@matrixsolutions.online</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:15px; margin-bottom:20px; align-items:center;">
+          <div
+            style="width:40px; height:40px; background:#E0F7FA; color:var(--teal); display:flex; align-items:center; justify-content:center; border-radius:50%;">
+            <i class="fa-solid fa-phone"></i></div>
+          <div>
+            <strong style="display:block; color:var(--dark);">Phone</strong>
+            <span style="font-size:14px;">+91 9363920623</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:15px; align-items:center;">
+          <div
+            style="width:40px; height:40px; background:#E0F7FA; color:var(--teal); display:flex; align-items:center; justify-content:center; border-radius:50%;">
+            <i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <strong style="display:block; color:var(--dark);">Location</strong>
+            <span style="font-size:14px;">Tamil Nadu, India</span>
+          </div>
+        </div>
+      </div>
+<form id="whatsappForm">
+  <h3 style="margin-bottom:20px; color:var(--dark);">Send a Message</h3>
+
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="email" id="email" placeholder="Email Address" required>
+  <textarea rows="4" id="message" placeholder="How can we help you?" required></textarea>
+
+  <button type="submit">
+    Chat on WhatsApp <i class="fa-brands fa-whatsapp" style="margin-left:8px;"></i>
+  </button>
+</form>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <div class=></div> MatriX Solutions
+        </div>
+        <p>
+          Leading HR consultancy in Madurai. We bridge the gap between talent and opportunity with ethical guidance and
+          professional preparation.
+        </p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="mailto:matrixsolutions.helpdesk@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="#contact">Contact Support</a></li>
+          <li><a href="index.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h3>Our Services</h3>
+        <ul>
+          <li><a href="index.html">Resume Building</a></li>
+          <li><a href="index.html">Interview Preparation</a></li>
+          <li><a href="index.html">LinkedIn Optimization</a></li>
+          <li><a href="index.html">Offer Comparison</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <p><i class="fa-solid fa-location-dot" style="color:var(--teal); margin-right:8px;"></i>Tamil Nadu, India</p>
+        <p><i class="fa-solid fa-phone" style="color:var(--teal); margin-right:8px;"></i> +91 9363920623</p>
+        <p><i class="fa-solid fa-envelope" style="color:var(--teal); margin-right:8px;"></i> info@matrixsolutions.online</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Matrix Solutions. All rights reserved. | Designed with Clarity & Courage.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+
+    // WhatsApp Redirect Form
+document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  const phone = "919363920623"; // your number without +
+
+  const text =
+`Hello Matrix Solutions,
+
+Name: ${name}
+Email: ${email}
+
+Message:
+${message}`;
+
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+  window.open(url, "_blank");
+});
+
+
+
+    AOS.init({ duration: 800, once: true, offset: 100 });
+
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      // Simple toggle logic
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+
+    // Nav active state (click + scroll spy)
+    (function() {
+      const navLinks = document.querySelectorAll('nav a.nav-link');
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+
+      // Click sets active immediately
+      navLinks.forEach(a => {
+        a.addEventListener('click', () => {
+          navLinks.forEach(x => x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+
+      // Scroll spy: set active based on current section
+      window.addEventListener('scroll', () => {
+        const pos = window.scrollY + window.innerHeight * 0.25;
+        let current = null;
+        sections.forEach(sec => {
+          const top = sec.offsetTop;
+          if (pos >= top) current = sec;
+        });
+        if (current) {
+          const id = '#' + current.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        }
+      }, { passive: true });
+
+      // on load, highlight by hash if present
+      if (window.location.hash) {
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === window.location.hash));
+      }
+    })();
+
+    // Text Typing Logic
+    const lines = [
+      [
+        { text: "Lead with ", highlight: "Clarity" },
+        { text: " Act with ", highlight: "Courage" }
+      ],
+      [
+        { text: "Leave a Legacy of ", highlight: "Excellence" }
+      ]
+    ];
+
+    const heading = document.getElementById("typing-heading");
+    let line = 0;
+    let part = 0;
+    let char = 0;
+    let stage = "text";
+
+    function typeEffect() {
+      if (line >= lines.length) return;
+
+      const currentPart = lines[line][part];
+
+      if (stage === "text") {
+        heading.innerHTML += currentPart.text.charAt(char);
+        char++;
+        if (char === currentPart.text.length) {
+          char = 0;
+          stage = "highlight";
+        }
+      }
+      else if (stage === "highlight") {
+        const span = document.createElement("span");
+        span.style.color = "#1FA9A0";
+        span.textContent = currentPart.highlight;
+        heading.appendChild(span);
+        stage = "next";
+      }
+      else if (stage === "next") {
+        part++;
+        if (part >= lines[line].length) {
+          heading.innerHTML += "<br>";
+          line++;
+          part = 0;
+        }
+        stage = "text";
+      }
+      setTimeout(typeEffect, 100);
+    }
+
+    window.addEventListener("load", () => {
+      heading.innerHTML = "";
+      typeEffect();
+    });
+
+    // 3D tilt / parallax for service cards
+    (function() {
+      // opt-out for users who prefer reduced motion
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const cards = document.querySelectorAll('.service-card');
+      const maxTilt = 12; // degrees
+      const maxGlareOpacity = 0.42;
+
+      function handleMove(e) {
+        const eventX = (e.clientX !== undefined) ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX);
+        const eventY = (e.clientY !== undefined) ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY);
+        const card = e.currentTarget;
+        const inner = card.querySelector('.card-inner');
+        const glare = card.querySelector('.card-glare');
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const relX = (eventX - cx) / (rect.width / 2);
+        const relY = (eventY - cy) / (rect.height / 2);
+
+        const rotateY = relX * maxTilt;
+        const rotateX = -relY * maxTilt;
+
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(18px) scale(1.02)`;
+
+        const px = ((eventX - rect.left) / rect.width) * 100;
+        const py = ((eventY - rect.top) / rect.height) * 100;
+        glare.style.setProperty('--gx', px + '%');
+        glare.style.setProperty('--gy', py + '%');
+
+        const dist = Math.hypot(relX, relY);
+        const opacity = Math.min(maxGlareOpacity, Math.max(0, 0.48 - dist * 0.6));
+        glare.style.opacity = opacity;
+      }
+
+      function handleEnter(e) {
+        e.currentTarget.classList.add('is-tilting');
+      }
+
+      function handleLeave(e) {
+        const card = e.currentTarget;
+        const inner = card.querySelector('.card-inner');
+        const glare = card.querySelector('.card-glare');
+        inner.style.transform = '';
+        glare.style.opacity = '0';
+        card.classList.remove('is-tilting');
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('touchmove', handleMove, { passive: true });
+        card.addEventListener('mouseenter', handleEnter);
+        card.addEventListener('mouseleave', handleLeave);
+        card.addEventListener('touchstart', handleEnter, { passive: true });
+        card.addEventListener('touchend', handleLeave);
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
