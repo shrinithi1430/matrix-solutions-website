@@ -33,18 +33,22 @@
       padding-top: 90px;
     }
 
+    /* ================= HEADER ================= */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: linear-gradient(180deg, rgba(240, 252, 251, 0.96), rgba(255, 255, 255, 0.95));
+      /* light header matching homepage with subtle separation */
+      background: linear-gradient(180deg, var(--header-light), rgba(255, 255, 255, 0.95));
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      padding: 16px 5%;
+      padding: 0px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 6px 30px rgba(16, 50, 53, 0.06);
       z-index: 1000;
+      transition: background 0.25s ease, transform 0.25s ease;
+      border-bottom: 1px solid rgba(4, 40, 39, 0.03);
     }
 
     .logo {
@@ -52,34 +56,68 @@
       align-items: center;
       gap: 12px;
       font-weight: 700;
+      font-size: 1.25rem;
       color: var(--teal-dark);
       text-decoration: none;
+    }
+
+    .logo p {
+      color: var(--teal);
+      margin: 0;
     }
 
     .logo img {
       width: 100px;
+      /* Adjusted size for better header fit */
       height: auto;
     }
 
+    /* Desktop Nav */
     nav {
       display: flex;
-      gap: 20px;
+      gap: 30px;
       align-items: center;
     }
 
-    nav a {
+    nav a.nav-link {
       text-decoration: none;
       color: var(--dark);
       font-weight: 500;
-      padding: 8px 14px;
+      font-size: 15px;
+      position: relative;
+      transition: color 0.25s, background 0.25s, transform 0.2s;
+      padding: 8px 12px;
       border-radius: 10px;
-      transition: background .2s, color .2s;
+      background: rgba(255, 255, 255, 0.55);
+      margin: 0 4px;
     }
 
-    nav a.active,
-    nav a:hover {
-      background: rgba(31, 169, 160, 0.1);
+    /* Underline Animation (kept subtle in boxed design) */
+    nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: var(--teal);
+      transition: width 0.25s ease;
+    }
+
+    nav a.nav-link:hover {
+      color: var(--teal);
+      background: rgba(31, 169, 160, 0.06);
+      transform: translateY(-2px);
+    }
+
+    nav a.nav-link.active {
+      background: rgba(31, 169, 160, 0.12);
       color: var(--teal-dark);
+      box-shadow: 0 6px 16px rgba(31, 169, 160, 0.08);
+    }
+
+    nav a.nav-link:hover::after {
+      width: 100%;
     }
 
     nav .cta-btn {
@@ -95,11 +133,12 @@
     }
 
     nav .cta-btn:hover {
-      background: #167e77;
+      background: var(--teal-dark);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(31, 169, 160, 0.4);
     }
 
+    /* Mobile Menu Button */
     .menu-icon {
       display: none;
       font-size: 24px;
@@ -494,7 +533,7 @@
 <body>
   <header>
     <a href="index.html" class="logo">
-      <div><img src="logo.png" alt="Logo"></div> MatriX Solutions
+      <div class=""><img src="logo.png" alt="Logo"></div> MatriX Solutions
     </a>
     <nav>
       <a href="index.html#services" class="nav-link">Services</a>
@@ -584,10 +623,11 @@
   <footer>
     <div class="footer-container">
       <div class="footer-col">
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
           <div class=""><img src="logo.png" alt="Logo"
               style="background-color: white;width: 40px; height: 40px; border-radius: 25%;">
-          </div> MatriX Solutions
+          </div>
+          <h3 style="padding-top: 10px;">MatriX Solutions</h3>
         </a>
         <p>Leading HR consultancy in Madurai. We bridge the gap between talent and opportunity with ethical guidance and
           professional preparation.</p>
