@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Job Posting Details | MatriX Solutions</title>
@@ -8,34 +9,666 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root { --teal: #1FA9A0; --teal-dark: #167e77; --dark: #2C3E50; --grey: #4A4F55; --light: #F7FDFC; --white: #ffffff; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #fff; color: var(--grey); min-height: 100vh; }
-    header { position: fixed; top: 0; width: 100%; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--teal-dark); text-decoration: none; }
-    nav { display: flex; gap: 20px; align-items: center; }
-    nav a { text-decoration: none; color: var(--dark); font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: background .2s, color .2s; }
-    nav a:hover { background: rgba(31,169,160,0.1); color: var(--teal-dark); }
-    .content { max-width: 900px; margin: 140px auto 80px; padding: 0 5%; }
-    .hero-image { width: 100%; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .hero-image img { width: 100%; display: block; object-fit: cover; height: 420px; }
-    .meta { margin: 24px 0 12px; color: var(--teal-dark); font-weight: 600; }
-    h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); color: var(--dark); margin-bottom: 18px; }
-    .content-block { margin-top: 24px; line-height: 1.8; color: var(--grey); font-size: 1rem; }
-    .content-block p { margin-bottom: 18px; }
-    .back-link { display: inline-flex; align-items: center; gap: 10px; color: var(--teal); text-decoration: none; font-weight: 600; margin-bottom: 30px; }
-    .empty, .error { padding: 48px 24px; text-align: center; color: var(--dark); }
+    :root {
+      --teal: #1FA9A0;
+      --teal-dark: #167e77;
+      --dark: #2C3E50;
+      --grey: #4A4F55;
+      --light: #F7FDFC;
+      --header-light: #F0FCFB;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #fff;
+      color: var(--grey);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 90px;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(180deg, var(--header-light), rgba(255, 255, 255, 0.95));
+      backdrop-filter: blur(8px);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 30px rgba(16, 50, 53, 0.06);
+      z-index: 1000;
+      transition: background 0.25s ease, transform 0.25s ease;
+      border-bottom: 1px solid rgba(4, 40, 39, 0.03);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a.nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 15px;
+      position: relative;
+      transition: color 0.25s, background 0.25s, transform 0.2s;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.55);
+      margin: 0 4px;
+    }
+
+    nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: var(--teal);
+      transition: width 0.25s ease;
+    }
+
+    nav a.nav-link:hover {
+      color: var(--teal);
+      background: rgba(31, 169, 160, 0.06);
+      transform: translateY(-2px);
+    }
+
+    nav a.nav-link.active {
+      background: rgba(31, 169, 160, 0.12);
+      color: var(--teal-dark);
+      box-shadow: 0 6px 16px rgba(31, 169, 160, 0.08);
+    }
+
+    nav a.nav-link:hover::after {
+      width: 100%;
+    }
+
+    nav .cta-btn {
+      background: var(--teal);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(31, 169, 160, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    nav .cta-btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(31, 169, 160, 0.4);
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      color: var(--dark);
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #eee;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 12px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #f5f5f5;
+      background: rgba(255, 255, 255, 0.6);
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--teal);
+      background: var(--light);
+    }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding-top: 70px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 25px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col:nth-child(4) {
+      width: 300px;
+    }
+
+    .footer-col p {
+      font-size: 14px;
+      color: #b0b8c1;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #b0b8c1;
+      font-size: 14px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--teal);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 25px 25px;
+      text-align: center;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    .content {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 5%;
+    }
+
+    .job-header {
+      background: #fff;
+      border: 1px solid rgba(31, 169, 160, 0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      position: relative;
+    }
+
+    .job-header-left {
+      flex: 1;
+    }
+
+    .job-header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .job-main-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .job-details-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-card {
+      background: #fff;
+      border: 1px solid rgba(31, 169, 160, 0.15);
+      border-radius: 16px;
+      padding: 24px;
+      position: sticky;
+      top: 110px;
+    }
+
+    .job-title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .company-logo-placeholder {
+      width: 60px;
+      height: 60px;
+      background: #f0fdfc;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--teal);
+      border: 1px solid rgba(31, 169, 160, 0.1);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .company-info {
+      font-size: 1rem;
+      color: var(--teal-dark);
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #f8fafc;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--grey);
+      font-weight: 500;
+    }
+
+    .meta-pill i {
+      color: var(--teal);
+    }
+
+    .apply-btn {
+      background: var(--teal);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+
+    .apply-btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(31, 169, 160, 0.3);
+    }
+
+    .save-btn {
+      background: #fff;
+      border: 1.5px solid var(--teal);
+      color: var(--teal);
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+
+    .save-btn:hover {
+      background: rgba(31, 169, 160, 0.05);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #f0fdfc;
+      padding-bottom: 10px;
+    }
+
+    .details-list {
+      list-style: none;
+    }
+
+    .details-list li {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      line-height: 1.6;
+    }
+
+    .details-list i {
+      color: var(--teal);
+      margin-top: 5px;
+    }
+
+    .job-card-image {
+      margin-bottom: 30px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      aspect-ratio: 1 / 1;
+      background: #f8fafc;
+    }
+
+    .job-card-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .sidebar-info-group {
+      margin-bottom: 20px;
+    }
+
+    .sidebar-info-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-info-value {
+      font-size: 0.95rem;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    @media(max-width: 900px) {
+      .job-main-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .job-header-right {
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .sidebar-card {
+        position: static;
+      }
+    }
+
+    .empty,
+    .error {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--dark);
+    }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding-top: 70px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 25px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col p {
+      font-size: 14px;
+      color: #b0b8c1;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #b0b8c1;
+      font-size: 14px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--teal);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 25px 25px;
+      text-align: center;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    @media(min-width: 900px) {
+      nav {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: none;
+      }
+
+      .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+    }
+
+    @media(max-width: 899px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+
+    @media (max-width:500px) {
+      .content {
+        padding: 0 5%;
+      }
+
+      .footer-bottom {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> MatriX Solutions</a>
+    <a href="index.html" class="logo">
+      <div class=""><img src="logo.png" alt="Logo"></div> MatriX Solutions
+    </a>
+
     <nav>
-      <a href="index.html">Home</a>
-      <a href="aboutus.html">About Us</a>
-      <a href="job-postings.html">Job Postings</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="aboutus.html" class="nav-link">About Us</a>
+      <a href="job-postings.html" class="nav-link active">Job Postings</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+      <a href="index.html#contact" class="cta-btn">Book Guidance</a>
     </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="mobile-nav" id="mobileMenu">
+      <a href="index.html" onclick="toggleMenu()">Home</a>
+      <a href="index.html#services" onclick="toggleMenu()">Services</a>
+      <a href="aboutus.html" onclick="toggleMenu()">About Us</a>
+      <a href="job-postings.html" onclick="toggleMenu()">Job Postings</a>
+      <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+      <a href="index.html#contact" style="color:var(--teal); font-weight:700;" onclick="toggleMenu()">Book Guidance</a>
+    </div>
   </header>
 
   <main class="content">
@@ -63,25 +696,108 @@
 
         const result = await response.json();
         if (!result.success || !result.data) throw new Error("Job data error");
-        
+
         const job = result.data;
         document.title = `${job.title} | MatriX Solutions`;
 
         blogDetail.innerHTML = `
-          <div class="hero-image"><img src="${job.posterImage || 'https://via.placeholder.com/1200x600?text=Job+Posting'}" alt="${job.title}"></div>
-          <p class="meta">${job.company ? `${job.company} · ` : ''}${job.location || 'Remote'} · ${job.jobType || 'Job'}</p>
-          <h1>${job.title}</h1>
-          <p class="meta">${job.experience || ''} ${job.salary ? `· ${job.salary}` : ''}</p>
-          <div class="content-block">
-            <h2>Roles and Responsibilities</h2>
-            <p>${job.responsibilities?.replace(/\n/g, '<br>') || 'No responsibilities provided.'}</p>
-            
-            ${job.description ? `<h2>Description</h2><p>${job.description.replace(/\n/g, '<br>')}</p>` : ''}
-            ${job.qualification ? `<h2>Qualification</h2><p>${job.qualification}</p>` : ''}
-            
-            <div style="margin-top: 40px;">
-                <a href="${job.applicationLink}" target="_blank" class="cta-btn" style="background: var(--teal); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-block;">Apply Now</a>
+          <div class="job-header">
+            <div class="job-header-left">
+              <div class="job-title-row">
+                <div class="company-logo-placeholder">
+                  <i class="fa-solid fa-building"></i>
+                </div>
+                <div>
+                  <h1>${job.title}</h1>
+                  <div class="company-info">
+                    <i class="fa-solid fa-briefcase"></i> ${job.company || 'MatriX Solutions'}
+                  </div>
+                </div>
+              </div>
+              <div class="meta-pills">
+                <div class="meta-pill"><i class="fa-solid fa-location-dot"></i> ${job.location || 'Remote'}</div>
+                <div class="meta-pill"><i class="fa-solid fa-clock"></i> ${job.jobType || 'Full Time'}</div>
+                ${job.experience ? `<div class="meta-pill"><i class="fa-solid fa-graduation-cap"></i> ${job.experience}</div>` : ''}
+                ${job.salary ? `<div class="meta-pill"><i class="fa-solid fa-indian-rupee-sign"></i> ${job.salary}</div>` : ''}
+              </div>
             </div>
+            <div class="job-header-right">
+              ${job.applicationLink ? `<a href="${job.applicationLink}" target="_blank" class="apply-btn">Apply Now</a>` : ''}
+              <a href="#" class="save-btn" onclick="alert('Feature coming soon!'); return false;">Save Job</a>
+            </div>
+          </div>
+
+          <div class="job-main-layout">
+            <div class="job-main-content">
+              <div class="job-card-image">
+                <img src="${job.posterImage || 'https://via.placeholder.com/1200x600?text=Job+Posting'}" alt="${job.title}">
+              </div>
+
+              <div class="job-details-card">
+                <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Roles and Responsibilities</h2>
+                <div class="content-block">
+                  ${job.responsibilities ? `
+                    <ul class="details-list">
+                      ${job.responsibilities.split('\n').filter(line => line.trim()).map(line => `
+                        <li><i class="fa-solid fa-circle-check"></i> ${line.trim()}</li>
+                      `).join('')}
+                    </ul>
+                  ` : '<p>No responsibilities provided.</p>'}
+                </div>
+
+                ${job.description ? `
+                  <h2 class="section-title" style="margin-top: 40px;"><i class="fa-solid fa-circle-info"></i> Job Description</h2>
+                  <div class="content-block">
+                    <p>${job.description.replace(/\n/g, '<br>')}</p>
+                  </div>
+                ` : ''}
+
+                ${job.qualification ? `
+                  <h2 class="section-title" style="margin-top: 40px;"><i class="fa-solid fa-user-graduate"></i> Qualification</h2>
+                  <div class="content-block">
+                    <p>${job.qualification.replace(/\n/g, '<br>')}</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <aside class="sidebar">
+              <div class="sidebar-card">
+                <h2 class="section-title" style="font-size: 1.1rem; border-bottom: none; margin-bottom: 15px;">Job Overview</h2>
+                
+                <div class="sidebar-info-group">
+                  <div class="sidebar-info-label">Posted On</div>
+                  <div class="sidebar-info-value">${new Date(job.createdAt || Date.now()).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                </div>
+
+                <div class="sidebar-info-group">
+                  <div class="sidebar-info-label">Job Type</div>
+                  <div class="sidebar-info-value">${job.jobType || 'Full Time'}</div>
+                </div>
+
+                <div class="sidebar-info-group">
+                  <div class="sidebar-info-label">Location</div>
+                  <div class="sidebar-info-value">${job.location || 'Remote'}</div>
+                </div>
+
+                <div class="sidebar-info-group">
+                  <div class="sidebar-info-label">Experience</div>
+                  <div class="sidebar-info-value">${job.experience || 'Not specified'}</div>
+                </div>
+
+                <div class="sidebar-info-group">
+                  <div class="sidebar-info-label">Salary</div>
+                  <div class="sidebar-info-value">${job.salary || 'Competitive'}</div>
+                </div>
+
+                <div style="margin-top: 25px;">
+                  <p style="font-size: 0.85rem; color: var(--grey); line-height: 1.5; margin-bottom: 15px;">
+                    Apply now to join the team at <strong>${job.company || 'MatriX Solutions'}</strong>.
+                  </p>
+                  ${job.applicationLink ? `<a href="${job.applicationLink}" target="_blank" class="apply-btn">Apply Now</a>` : ''}
+                </div>
+              </div>
+            </aside>
           </div>
         `;
       } catch (error) {
@@ -91,6 +807,64 @@
     }
 
     loadBlog();
+
+    function toggleMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+    }
   </script>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <a href="index.html" class="logo">
+          <div class=""><img src="logo.png" alt="Logo"
+              style="background-color: white;width: 40px; height: 40px; border-radius: 25%;">
+          </div> MatriX Solutions
+        </a>
+        <p>Leading HR consultancy in Madurai. We bridge the gap between talent and opportunity with ethical guidance and
+          professional preparation.</p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="mailto:matrixsolutions.helpdesk@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="index.html#contact">Contact Support</a></li>
+          <li><a href="index.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h3>Our Services</h3>
+        <ul>
+          <li><a href="index.html">Resume Building</a></li>
+          <li><a href="index.html">Interview Preparation</a></li>
+          <li><a href="index.html">LinkedIn Optimization</a></li>
+          <li><a href="index.html">Offer Comparison</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <p><i class="fa-solid fa-location-dot" style="color:var(--teal); margin-right:8px;"></i>Tamil Nadu, India</p>
+        <p><i class="fa-solid fa-phone" style="color:var(--teal); margin-right:8px;"></i> +91 9363920623</p>
+        <p><i class="fa-solid fa-envelope" style="color:var(--teal); margin-right:8px;"></i> info@matrixsolutions.online
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Matrix Solutions. All rights reserved. | Designed with Clarity & Courage.
+    </div>
+  </footer>
 </body>
+
 </html>

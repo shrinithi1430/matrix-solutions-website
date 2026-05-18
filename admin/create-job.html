@@ -15,9 +15,10 @@
         <aside class="sidebar">
             <div class="sidebar-logo" style="display: flex; align-items: center; gap: 10px; margin-bottom: 2rem;">
                 <div
-                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px;">
-                    M</div>
-                <h2 style="font-size: 22px; color: white;">Matrix HR</h2>
+                    style="width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px;">
+                    <img src="../logo.png" alt="" style="width: 100%; height: 100%;">
+                </div>
+                <h2 style="font-size: 22px; color: white;">Matrix Solution</h2>
             </div>
             <nav>
                 <ul class="nav-list">
@@ -27,10 +28,10 @@
                                 Jobs</span></a></li>
                     <li class="nav-item"><a href="create-job.html" class="nav-link active"><i
                                 data-lucide="plus-circle"></i><span>Create Job</span></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><i
+                    <!-- <li class="nav-item"><a href="#" class="nav-link"><i
                                 data-lucide="bar-chart-3"></i><span>Analytics</span></a></li>
                     <li class="nav-item"><a href="#" class="nav-link"><i
-                                data-lucide="settings"></i><span>Settings</span></a></li>
+                                data-lucide="settings"></i><span>Settings</span></a></li> -->
                 </ul>
             </nav>
         </aside>
@@ -39,16 +40,25 @@
         <main class="main-content">
             <header class="header">
                 <div class="header-left">
-                    <h2 style="font-size: 20px;">Post a New Job</h2>
-                    <p style="font-size: 13px; color: var(--text-muted);">Fill in the details to reach thousands of
-                        candidates</p>
+                    <button class="btn btn-ghost" style="display: none;"><i data-lucide="menu"></i></button>
+                    <div class="search-bar" style="position: relative;">
+                        <i data-lucide="search"
+                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; color: var(--text-muted);"></i>
+                        <input type="text" class="form-control" placeholder="Search anything..."
+                            style="padding-left: 40px; width: 300px; background: #f1f5f9; border: none;">
+                    </div>
                 </div>
-                <div class="header-right">
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="btn btn-outline" onclick="saveDraft()"><i data-lucide="save"></i> Save
-                            Draft</button>
-                        <button class="btn btn-primary" onclick="publishJob()"><i data-lucide="send"></i> Publish
-                            Job</button>
+                <div class="header-right" style="display: flex; align-items: center; gap: 1.5rem;">
+
+                    <div class="admin-profile"
+                        style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                        <div style="text-align: right;">
+                            <p style="font-size: 14px; font-weight: 700; color: var(--text-main);">Admin</p>
+                            <a href="index.html"
+                                style="font-size: 11px; color: var(--danger); text-decoration: none; font-weight: 600;">Logout</a>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=008080&color=fff" alt="Admin"
+                            style="width: 45px; height: 45px; border-radius: 12px; border: 2px solid var(--primary-light);">
                     </div>
                 </div>
             </header>
@@ -61,7 +71,8 @@
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;">
                                 <div
                                     style="background: var(--primary-light); color: var(--primary); padding: 10px; border-radius: 12px;">
-                                    <i data-lucide="info"></i></div>
+                                    <i data-lucide="info"></i>
+                                </div>
                                 <h3 style="font-size: 18px;">Basic Information</h3>
                             </div>
 
@@ -230,6 +241,20 @@
                                     </label>
                                 </div>
                             </div>
+
+                            <!-- Expiration Date -->
+                            <div class="form-group" style="margin-top: 1.5rem;">
+                                <label class="form-label">Expiration Date & Time</label>
+                                <input type="datetime-local" id="expires-at" class="form-control">
+                                <span style="font-size: 11px; color: var(--text-muted);">Leave blank for no expiration.
+                                    Post will be automatically deleted at this time.</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                            <button class="btn btn-outline" onclick="saveDraft()">Save Draft</button>
+                            <button class="btn btn-primary" onclick="publishJob()">Publish Job</button>
                         </div>
                     </div>
 
@@ -279,7 +304,8 @@
                                         <i data-lucide="users" style="width: 14px;"></i> 1 Opening
                                     </p>
                                 </div>
-                                <div id="preview-responsibilities" style="margin-top: 1rem; font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; border-top: 1px solid #f1f5f9; padding-top: 0.75rem;">
+                                <div id="preview-responsibilities"
+                                    style="margin-top: 1rem; font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box;  -webkit-box-orient: vertical; overflow: hidden; border-top: 1px solid #f1f5f9; padding-top: 0.75rem;">
                                     Responsibilities will appear here...
                                 </div>
                             </div>
@@ -324,7 +350,7 @@
             document.getElementById('preview-workmode').textContent = workMode.toUpperCase();
             document.getElementById('preview-location').innerHTML = `<i data-lucide="map-pin" style="width: 14px;"></i> ${location || 'Location'}`;
             document.getElementById('preview-openings').innerHTML = `<i data-lucide="users" style="width: 14px;"></i> ${openings} Opening${openings > 1 ? 's' : ''}`;
-            
+
             const responsibilities = document.getElementById('responsibilities').value;
             document.getElementById('preview-responsibilities').textContent = responsibilities || 'Responsibilities will appear here...';
 
@@ -353,14 +379,14 @@
             const posterInput = document.getElementById('poster-image');
             const uploadBtn = document.getElementById('upload-btn');
             const fileNameDisplay = document.getElementById('file-name');
-            
+
             posterInput.value = '';
             fileNameDisplay.innerHTML = '';
             uploadBtn.innerHTML = '<i data-lucide="upload-cloud"></i> Upload';
             uploadBtn.style.background = 'transparent';
             uploadBtn.style.borderColor = 'var(--border-color)';
             uploadBtn.disabled = false;
-            
+
             updatePreview();
             lucide.createIcons();
         }
@@ -477,6 +503,8 @@
             lucide.createIcons();
 
             const title = document.getElementById('job-title').value;
+            const expiresAtValue = document.getElementById('expires-at').value;
+
             const jobData = {
                 title: title,
                 company: document.getElementById('company-name').value,
@@ -494,7 +522,8 @@
                 isFeatured: document.getElementById('is-featured').checked,
                 isUrgent: document.getElementById('is-urgent').checked,
                 isActive: document.getElementById('is-active').checked,
-                status: 'Published'
+                status: 'Published',
+                expiresAt: expiresAtValue ? new Date(expiresAtValue).toISOString() : null
             };
 
             try {
