@@ -135,6 +135,7 @@
                                 <h3 style="font-size: 18px;">Categorization</h3>
                             </div>
                             <div class="grid grid-3">
+                                <!-- Job Type -->
                                 <div class="form-group">
                                     <label class="form-label">Job Type<span class="required-mark">*</span></label>
                                     <select id="job-type" class="form-control">
@@ -146,8 +147,11 @@
                                         <option value="Walk-In">Walk-In</option>
                                     </select>
                                 </div>
+
+                                <!-- Industry -->
                                 <div class="form-group">
                                     <label class="form-label">Industry<span class="required-mark">*</span></label>
+
                                     <select id="industry" class="form-control">
                                         <option value="">Select Industry</option>
                                         <option value="IT & Software">IT & Software</option>
@@ -156,10 +160,18 @@
                                         <option value="Healthcare">Healthcare</option>
                                         <option value="Education">Education</option>
                                         <option value="Finance">Finance</option>
+                                        <option value="Others">Others</option>
                                     </select>
+
+                                    <!-- Others Input -->
+                                    <input type="text" id="industry-other" class="form-control"
+                                        placeholder="Enter custom industry" style="margin-top: 10px; display: none;">
                                 </div>
+
+                                <!-- Department -->
                                 <div class="form-group">
                                     <label class="form-label">Department<span class="required-mark">*</span></label>
+
                                     <select id="department" class="form-control">
                                         <option value="">Select Department</option>
                                         <option value="Engineering">Engineering</option>
@@ -167,7 +179,12 @@
                                         <option value="Operations">Operations</option>
                                         <option value="Sales & Marketing">Sales & Marketing</option>
                                         <option value="Human Resources">Human Resources</option>
+                                        <option value="Others">Others</option>
                                     </select>
+
+                                    <!-- Others Input -->
+                                    <input type="text" id="department-other" class="form-control"
+                                        placeholder="Enter custom department" style="margin-top: 10px; display: none;">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -346,7 +363,11 @@
 
             document.getElementById('preview-title').textContent = title || 'Job Title';
             document.getElementById('preview-company').textContent = company || 'Company Name';
-            document.getElementById('preview-type').textContent = type.toUpperCase();
+            document.getElementById('preview-type').textContent =
+                type ? type.toUpperCase() : 'JOB TYPE';
+
+            document.getElementById('preview-workmode').textContent =
+                workMode ? workMode.toUpperCase() : 'WORK MODE';
             document.getElementById('preview-workmode').textContent = workMode.toUpperCase();
             document.getElementById('preview-location').innerHTML = `<i data-lucide="map-pin" style="width: 14px;"></i> ${location || 'Location'}`;
             document.getElementById('preview-openings').innerHTML = `<i data-lucide="users" style="width: 14px;"></i> ${openings} Opening${openings > 1 ? 's' : ''}`;
@@ -488,6 +509,25 @@
                 firstErrorField.focus();
                 return false;
             }
+            // Validate Industry Others
+            if (
+                document.getElementById('industry').value === 'Others' &&
+                !document.getElementById('industry-other').value.trim()
+            ) {
+                document.getElementById('industry-other').classList.add('field-error');
+                document.getElementById('industry-other').focus();
+                return false;
+            }
+
+            // Validate Department Others
+            if (
+                document.getElementById('department').value === 'Others' &&
+                !document.getElementById('department-other').value.trim()
+            ) {
+                document.getElementById('department-other').classList.add('field-error');
+                document.getElementById('department-other').focus();
+                return false;
+            }
 
             return true;
         }
@@ -513,8 +553,15 @@
                 posterImage: document.getElementById('poster-image').value,
                 responsibilities: document.getElementById('responsibilities').value,
                 jobType: document.getElementById('job-type').value,
-                industry: document.getElementById('industry').value,
-                department: document.getElementById('department').value,
+                industry:
+                    document.getElementById('industry').value === 'Others'
+                        ? document.getElementById('industry-other').value
+                        : document.getElementById('industry').value,
+
+                department:
+                    document.getElementById('department').value === 'Others'
+                        ? document.getElementById('department-other').value
+                        : document.getElementById('department').value,
                 roleCategory: document.getElementById('role-category').value,
                 openings: parseInt(document.getElementById('openings').value) || 1,
                 location: document.getElementById('location').value,
@@ -557,7 +604,18 @@
         }
 
         // Event Listeners for Live Preview
-        ['job-title', 'company-name', 'poster-image', 'location', 'openings', 'app-link', 'role-category', 'responsibilities'].forEach(id => {
+        [
+            'job-title',
+            'company-name',
+            'poster-image',
+            'location',
+            'openings',
+            'app-link',
+            'role-category',
+            'responsibilities',
+            'industry-other',
+            'department-other'
+        ].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
                 el.addEventListener('input', (e) => {
@@ -576,6 +634,75 @@
                 });
             }
         });
+
+        // Industry Others Toggle
+        document.getElementById('industry').addEventListener('change', function () {
+            const otherInput = document.getElementById('industry-other');
+
+            if (this.value === 'Others') {
+                otherInput.style.display = 'block';
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.value = '';
+            }
+        });
+
+        // Department Others Toggle
+        document.getElementById('department').addEventListener('change', function () {
+            const otherInput = document.getElementById('department-other');
+
+            if (this.value === 'Others') {
+                otherInput.style.display = 'block';
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.value = '';
+            }
+        });
+
+
+        async function loadJobForEdit() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) return;
+
+            try {
+                const response = await fetch(`https://matrix-solution-server.onrender.com/api/jobs/${id}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const job = result.data;
+
+                    document.getElementById('job-title').value = job.title || '';
+                    document.getElementById('company-name').value = job.company || '';
+                    document.getElementById('app-link').value = job.applicationLink || '';
+                    document.getElementById('poster-image').value = job.posterImage || '';
+                    document.getElementById('responsibilities').value = job.responsibilities || '';
+                    document.getElementById('job-type').value = job.jobType || '';
+                    document.getElementById('industry').value = job.industry || '';
+                    document.getElementById('department').value = job.department || '';
+                    document.getElementById('role-category').value = job.roleCategory || '';
+                    document.getElementById('openings').value = job.openings || 1;
+                    document.getElementById('location').value = job.location || '';
+                    document.getElementById('work-mode').value = job.workMode || 'On-site';
+
+                    document.getElementById('is-featured').checked = job.isFeatured || false;
+                    document.getElementById('is-urgent').checked = job.isUrgent || false;
+                    document.getElementById('is-active').checked = job.isActive || false;
+
+                    if (job.expiresAt) {
+                        document.getElementById('expires-at').value =
+                            new Date(job.expiresAt).toISOString().slice(0, 16);
+                    }
+
+                    updatePreview();
+                }
+            } catch (error) {
+                console.error('Error loading job:', error);
+            }
+        }
+
+        loadJobForEdit();
 
         // Slug generation logic removed from UI, handled in publishJob
     </script>
